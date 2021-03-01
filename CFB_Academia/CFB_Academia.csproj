@@ -169,6 +169,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210301230214_MigracaoInicial.cs" />
+    <Compile Include="Migrations\20210301230214_MigracaoInicial.designer.cs">
+      <DependentUpon>20210301230214_MigracaoInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AcademiaContextoModelSnapshot.cs" />
+    <Compile Include="Models\AcademiaContexto.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -194,9 +201,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
