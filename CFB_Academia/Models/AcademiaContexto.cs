@@ -11,7 +11,7 @@ namespace CFB_Academia.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("Data Source=db_academia");
+            options.UseSqlite("Data Source=db_academia.db");
         }
         public DbSet<Usuario> Usuarios { get; set; }
     }
