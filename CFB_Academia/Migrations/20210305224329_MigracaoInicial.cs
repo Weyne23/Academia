@@ -14,7 +14,7 @@ namespace CFB_Academia.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    NivelUsuario = table.Column<string>(nullable: true),
+                    NivelUsuario = table.Column<int>(nullable: false),
                     NomeUsuario = table.Column<string>(nullable: true),
                     SenhaUsuario = table.Column<string>(nullable: true),
                     StatusUsuario = table.Column<string>(nullable: true),

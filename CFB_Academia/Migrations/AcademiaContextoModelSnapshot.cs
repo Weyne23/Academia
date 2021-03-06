@@ -23,7 +23,7 @@ namespace CFB_Academia.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("NivelUsuario");
+                    b.Property<int>("NivelUsuario");
 
                     b.Property<string>("NomeUsuario");
 

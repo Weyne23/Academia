@@ -15,7 +15,7 @@ namespace CFB_Academia.Models
         public string UserName { get; set; }
         public string SenhaUsuario { get; set; }
         public string StatusUsuario { get; set; }
-        public string NivelUsuario { get; set; }
+        public int NivelUsuario { get; set; }
 
     }
 }

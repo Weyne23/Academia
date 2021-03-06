@@ -10,8 +10,8 @@ using System;
 namespace CFB_Academia.Migrations
 {
     [DbContext(typeof(AcademiaContexto))]
-    [Migration("20210305014335_migracao-banco")]
-    partial class migracaobanco
+    [Migration("20210305224329_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace CFB_Academia.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("NivelUsuario");
+                    b.Property<int>("NivelUsuario");
 
                     b.Property<string>("NomeUsuario");
 

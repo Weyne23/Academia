@@ -24,6 +24,7 @@ namespace CFB_Academia
         {
             string username = tb_userName.Text;
             string senha = tb_senha.Text;
+            Usuario user;
 
             if (username == "" || senha == "")
             {
@@ -36,13 +37,19 @@ namespace CFB_Academia
             {
                 using (var ctx = new AcademiaContexto())
                 {
-                    var user = ctx.Usuarios.Single(u => u.UserName == username);
-                    MessageBox.Show("Usuario cadastrado.");
+                    user = ctx.Usuarios.Single(u => u.UserName == username && u.SenhaUsuario == senha);
                 }
+
+                form1.lb_acesso.Text = user.NivelUsuario.ToString();
+                form1.lb_nomeUsuario.Text = user.NomeUsuario;
+                form1.pb_ledLogado.Image = Properties.Resources.led_circle_green;
+                Globais.nivel = user.NivelUsuario;
+                Globais.logado = true;
+                this.Close();
             }
             catch
             {
-                MessageBox.Show("Usuario ou senha errados!");
+                MessageBox.Show("Usuario ou senha errados!", "Erro");
             }
         }
 
