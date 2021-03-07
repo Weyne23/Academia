@@ -15,6 +15,7 @@ namespace CFB_Academia
         {
             DataTable dt = new DataTable();
             List<Usuario> usuarios = new List<Usuario>();
+
             try
             {
                 using (var ctx = new AcademiaContexto()) {

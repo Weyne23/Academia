@@ -59,7 +59,8 @@ namespace CFB_Academia
             {
                 if (Globais.nivel >= 2)
                 {
-                    //ToDo
+                    F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
+                    f_NovoUsuario.ShowDialog();
                 }
                 else
                 {
@@ -78,7 +79,8 @@ namespace CFB_Academia
             {
                 if (Globais.nivel >= 2)
                 {
-                    //ToDo
+                    F_GestaoUsuarios f_GestaoUsuarios = new F_GestaoUsuarios(this);
+                    f_GestaoUsuarios.ShowDialog();
                 }
                 else
                 {
