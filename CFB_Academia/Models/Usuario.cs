@@ -10,7 +10,7 @@ namespace CFB_Academia.Models
 {
     class Usuario
     {
-        public int Id { get; set; }
+        public int UsuarioID { get; set; }
         public string NomeUsuario { get; set; }
         public string UserName { get; set; }
         public string SenhaUsuario { get; set; }

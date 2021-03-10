@@ -31,7 +31,7 @@ namespace CFB_Academia
 
                 foreach (var u in usuarios)
                 {
-                    dt.Rows.Add(u.Id, u.NomeUsuario, u.UserName, u.SenhaUsuario, u.StatusUsuario, u.NivelUsuario);
+                    dt.Rows.Add(u.UsuarioID, u.NomeUsuario, u.UserName, u.SenhaUsuario, u.StatusUsuario, u.NivelUsuario);
                 }
 
                 return dt;

@@ -61,6 +61,7 @@ namespace CFB_Academia
             this.tb_userName.Name = "tb_userName";
             this.tb_userName.Size = new System.Drawing.Size(175, 20);
             this.tb_userName.TabIndex = 2;
+            this.tb_userName.Text = "adm";
             // 
             // tb_senha
             // 
@@ -69,6 +70,7 @@ namespace CFB_Academia
             this.tb_senha.PasswordChar = '*';
             this.tb_senha.Size = new System.Drawing.Size(175, 20);
             this.tb_senha.TabIndex = 3;
+            this.tb_senha.Text = "123";
             // 
             // btn_logar
             // 

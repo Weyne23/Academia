@@ -20,28 +20,37 @@ namespace CFB_Academia
             form = f;
         }
 
-        private void carregarUsuarios()
+        private void carregarUsuarios(int tamanhoId, int tamanhoNomeUser)
         {
             DataTable dt = new DataTable();
 
-            using (var ctx = new AcademiaContexto())
+            try
             {
-                var user = (from u in ctx.Usuarios
-                            select new
-                            {
-                                idUser = u.Id,
-                                nomeUser = u.NomeUsuario
-                            });
-
-                dt.Columns.Add("Id", typeof(int));
-                dt.Columns.Add("Nome Usuario", typeof(string));
-
-                foreach (var u in user)
+                using (var ctx = new AcademiaContexto())
                 {
-                    dt.Rows.Add(u.idUser, u.nomeUser);
+                    var user = (from u in ctx.Usuarios
+                                select new
+                                {
+                                    idUser = u.UsuarioID,
+                                    nomeUser = u.NomeUsuario
+                                });
+
+                    dt.Columns.Add("Id", typeof(int));
+                    dt.Columns.Add("Nome Usuario", typeof(string));
+
+                    foreach (var u in user)
+                    {
+                        dt.Rows.Add(u.idUser, u.nomeUser);
+                    }
+                    dgv_usuarios.DataSource = dt;
+                    dgv_usuarios.Columns[0].Width = tamanhoId;
+                    dgv_usuarios.Columns[1].Width = tamanhoNomeUser;
                 }
-                dgv_usuarios.DataSource = dt;
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Erro" + ex.Message, "Erro");
             }
+            
         }
 
         private void btn_fechar_Click(object sender, EventArgs e)
@@ -51,9 +60,7 @@ namespace CFB_Academia
 
         private void F_GestaoUsuarios_Load(object sender, EventArgs e)
         {
-            carregarUsuarios();
-            dgv_usuarios.Columns[0].Width = 75;
-            dgv_usuarios.Columns[1].Width = 170;
+            carregarUsuarios(75, 170);
         }
 
         private void dgv_usuarios_SelectionChanged(object sender, EventArgs e)
@@ -68,7 +75,8 @@ namespace CFB_Academia
                 {
                     user = ctx.Usuarios.Find(linhaCel);
                 }
-                tb_ID.Text = user.Id.ToString();
+
+                tb_ID.Text = user.UsuarioID.ToString();
                 tb_nome.Text = user.NomeUsuario;
                 tb_userName.Text = user.UserName;
                 tb_senha.Text = user.SenhaUsuario;
@@ -81,7 +89,7 @@ namespace CFB_Academia
         {
             F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
             f_NovoUsuario.ShowDialog();
-            carregarUsuarios();
+            carregarUsuarios(75, 170);
         }
 
         private void btrn_salvarAlteracoes_Click(object sender, EventArgs e)

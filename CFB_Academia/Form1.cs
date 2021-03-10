@@ -19,6 +19,25 @@ namespace CFB_Academia
             f_Login.ShowDialog();
         }
 
+        private void abreForm(int nivel, Form f)
+        {
+            if (Globais.logado)
+            {
+                if (Globais.nivel >= nivel)
+                {
+                    f.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Acesso negado!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("É necessario ter um usuario logado.");
+            }
+        }
+
         private void logarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_Login f_Login = new F_Login(this);
@@ -55,42 +74,15 @@ namespace CFB_Academia
 
         private void novoUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Globais.logado)
-            {
-                if (Globais.nivel >= 2)
-                {
-                    F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
-                    f_NovoUsuario.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Acesso negado!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("É necessario ter um usuario logado.");
-            }
+            F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
+            abreForm(Globais.nivel, f_NovoUsuario);
         }
 
         private void usuáriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Globais.logado)
-            {
-                if (Globais.nivel >= 2)
-                {
-                    F_GestaoUsuarios f_GestaoUsuarios = new F_GestaoUsuarios(this);
-                    f_GestaoUsuarios.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Acesso negado!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("É necessario ter um usuario logado.");
-            }
+            F_GestaoUsuarios f_GestaoUsuarios = new F_GestaoUsuarios(this);
+            abreForm(Globais.nivel, f_GestaoUsuarios);
+               
         }
 
         private void novoAlunoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,6 +95,12 @@ namespace CFB_Academia
             {
                 MessageBox.Show("É necessario ter um usuario logado.");
             }
+        }
+
+        private void horáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_Horarios f_Horarios = new F_Horarios();
+            abreForm(Globais.nivel, f_Horarios);
         }
     }
 }

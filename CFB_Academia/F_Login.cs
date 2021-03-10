@@ -45,7 +45,7 @@ namespace CFB_Academia
                 form1.pb_ledLogado.Image = Properties.Resources.led_circle_green;
                 Globais.nivel = user.NivelUsuario;
                 Globais.logado = true;
-                Globais.IdUsuarioLogado = user.Id;
+                Globais.IdUsuarioLogado = user.UsuarioID;
                 this.Close();
             }
             catch

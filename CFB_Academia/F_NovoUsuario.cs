@@ -58,7 +58,7 @@ namespace CFB_Academia
 
                 if(user == null)
                 {
-                    ctx.Usuarios.Add(usuario);
+                    ctx.Add(usuario);
                     ctx.SaveChanges();
                     MessageBox.Show("Usuario Cadastrado com sucesso.", "Mensagem");
                     limparCampos();

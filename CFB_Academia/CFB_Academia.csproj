@@ -177,6 +177,12 @@
     <Compile Include="F_GestaoUsuarios.Designer.cs">
       <DependentUpon>F_GestaoUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_Horarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Horarios.Designer.cs">
+      <DependentUpon>F_Horarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,12 +196,15 @@
       <DependentUpon>F_NovoUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Globais.cs" />
-    <Compile Include="Migrations\20210305224329_MigracaoInicial.cs" />
-    <Compile Include="Migrations\20210305224329_MigracaoInicial.designer.cs">
-      <DependentUpon>20210305224329_MigracaoInicial.cs</DependentUpon>
+    <Compile Include="Migrations\20210308231022_MigracaoInicial.cs" />
+    <Compile Include="Migrations\20210308231022_MigracaoInicial.designer.cs">
+      <DependentUpon>20210308231022_MigracaoInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AcademiaContextoModelSnapshot.cs" />
     <Compile Include="Models\AcademiaContexto.cs" />
+    <Compile Include="Models\Horario.cs" />
+    <Compile Include="Models\Professor.cs" />
+    <Compile Include="Models\Turma.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_GestaoUsuarios.resx">
       <DependentUpon>F_GestaoUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Horarios.resx">
+      <DependentUpon>F_Horarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_Login.resx">
       <DependentUpon>F_Login.cs</DependentUpon>
