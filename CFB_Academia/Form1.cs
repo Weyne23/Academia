@@ -75,13 +75,13 @@ namespace CFB_Academia
         private void novoUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
-            abreForm(Globais.nivel, f_NovoUsuario);
+            abreForm(2, f_NovoUsuario);
         }
 
         private void usuáriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_GestaoUsuarios f_GestaoUsuarios = new F_GestaoUsuarios(this);
-            abreForm(Globais.nivel, f_GestaoUsuarios);
+            abreForm(2, f_GestaoUsuarios);
                
         }
 
@@ -100,7 +100,13 @@ namespace CFB_Academia
         private void horáriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_Horarios f_Horarios = new F_Horarios();
-            abreForm(Globais.nivel, f_Horarios);
+            abreForm(3, f_Horarios);
+        }
+
+        private void professoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_GestaoProfessores f_GestaoProfessores = new F_GestaoProfessores();
+            abreForm(3, f_GestaoProfessores);
         }
     }
 }

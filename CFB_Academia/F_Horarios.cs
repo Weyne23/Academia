@@ -13,9 +13,11 @@ namespace CFB_Academia
 {
     public partial class F_Horarios : Form
     {
+        string mtb_teste;
         public F_Horarios()
         {
             InitializeComponent();
+            mtb_teste = mtb_desHorario.Text;
         }
 
         private void carregarHorarios(int tamanoId, int tamanhoDesHorario)
@@ -100,42 +102,61 @@ namespace CFB_Academia
         {
             if (tb_idHorario.Text == "")
             {
-                using (var ctx = new AcademiaContexto())
+                if (mtb_desHorario.Text != mtb_teste)
                 {
-                    Horario horario = new Horario();
-                    horario.DesHorario = mtb_desHorario.Text;
-                    var existeHor = ctx.Horarios.SingleOrDefault(h => h.DesHorario == mtb_desHorario.Text);
+                    using (var ctx = new AcademiaContexto())
+                    {
+                        var existeHor = ctx.Horarios.SingleOrDefault(h => h.DesHorario == mtb_desHorario.Text);
 
-                    if (existeHor == null)
-                    {
-                        ctx.Add(horario);
-                        ctx.SaveChanges();
-                        MessageBox.Show("horário adicionado!", "Mensagem");
-                        carregarHorarios(140, 270);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Horário já Adicionado!", "Erro");
+                        if (existeHor == null)
+                        {
+                            Horario horario = new Horario();
+                            horario.DesHorario = mtb_desHorario.Text;
+                            ctx.Add(horario);
+                            ctx.SaveChanges();
+                            MessageBox.Show("horário adicionado!", "Mensagem");
+                            carregarHorarios(140, 270);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Horário já Adicionado!", "Erro");
+                            mtb_desHorario.Focus();
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Campo horário obrigatorio", "Erro");
+                    mtb_desHorario.Focus();
+                } 
             }
             else
             {
-                using (var ctx = new AcademiaContexto())
+                if (mtb_desHorario.Text != "")
                 {
-                    int idHorario = Convert.ToInt32(tb_idHorario.Text);
-                    var existeHor = ctx.Horarios.SingleOrDefault(h => h.DesHorario == mtb_desHorario.Text);
-                    if (existeHor == null)
+                    using (var ctx = new AcademiaContexto())
                     {
-                        var horario = ctx.Horarios.Find(idHorario);
-                        ctx.SaveChanges();
-                        horario.DesHorario = mtb_desHorario.Text;
-                        dgv_horarios.SelectedRows[0].Cells[1].Value = mtb_desHorario.Text;
+                        int idHorario = Convert.ToInt32(tb_idHorario.Text);
+                        var existeHor = ctx.Horarios.SingleOrDefault(h => h.DesHorario == mtb_desHorario.Text);
+                        if (existeHor == null)
+                        {
+                            var horario = ctx.Horarios.Find(idHorario);
+                            ctx.SaveChanges();
+                            horario.DesHorario = mtb_desHorario.Text;
+                            dgv_horarios.SelectedRows[0].Cells[1].Value = mtb_desHorario.Text;
+                            MessageBox.Show("horário atualizado!", "Mensagem");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Horário já Adicionado.", "Erro");
+                            mtb_desHorario.Focus();
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Horário já Existe!", "Erro");
-                    } 
+                }
+                else
+                {
+                    MessageBox.Show("Campo horário obrigatorio", "Erro");
+                    mtb_desHorario.Focus();
                 }
             }
         }
