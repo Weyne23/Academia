@@ -177,6 +177,12 @@
     <Compile Include="F_GestaoProfessores.Designer.cs">
       <DependentUpon>F_GestaoProfessores.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_GestaoTurmas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GestaoTurmas.Designer.cs">
+      <DependentUpon>F_GestaoTurmas.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_GestaoUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_GestaoProfessores.resx">
       <DependentUpon>F_GestaoProfessores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GestaoTurmas.resx">
+      <DependentUpon>F_GestaoTurmas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_GestaoUsuarios.resx">
       <DependentUpon>F_GestaoUsuarios.cs</DependentUpon>
