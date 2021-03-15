@@ -13,9 +13,20 @@ namespace CFB_Academia
 {
     public partial class F_GestaoTurmas : Form
     {
+        int idTurma;
+        int modo = 0; //0 = neutro, 1 = Edição, 2 = atualização
         public F_GestaoTurmas()
         {
             InitializeComponent();
+        }
+
+        private void limparCampos()
+        {
+            tb_nomeTurma.Clear();
+            cb_horario.SelectedIndex = -1;
+            cb_nomeProfessor.SelectedIndex = -1;
+            n_maxAlunos.Value = 1;
+            cb_status.SelectedIndex = -1;
         }
 
         private void carregarTurmas(int tamId, int tamTurma, int tamHorario)
@@ -41,6 +52,7 @@ namespace CFB_Academia
                     {
                         dt.Rows.Add(t.idTurma, t.desTurma, t.desHorario);
                     }
+
                     dgv_turmas.DataSource = dt;
                     dgv_turmas.Columns[0].Width = tamId;
                     dgv_turmas.Columns[1].Width = tamTurma;
@@ -49,7 +61,7 @@ namespace CFB_Academia
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro" + ex.Message, "Erro");
+                MessageBox.Show("Erro " + ex.Message, "Erro");
             }
         }
 
@@ -61,7 +73,7 @@ namespace CFB_Academia
             using (var ctx = new AcademiaContexto())
             {
                 var professores = ctx.Professores
-                                    .Select(p => new { p.Nome,  p.ProfessorID })
+                                    .Select(p => new { p.Nome, p.ProfessorID })
                                     .OrderBy(p => p.ProfessorID);
                 cb_nomeProfessor.Items.Clear();
 
@@ -119,6 +131,101 @@ namespace CFB_Academia
             carregarProfessores();
             carregarStatus();
             carregarHorarios();
+        }
+
+        private void dgv_turmas_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            int numLinhas = dgv.SelectedRows.Count;
+            if (numLinhas > 0)
+            {
+                modo = 1;
+                idTurma = Convert.ToInt32(dgv.SelectedRows[0].Cells[0].Value);
+                using (var ctx = new AcademiaContexto())
+                {
+                    var turma = ctx.Turmas.Where(t => t.TurmaID == idTurma)
+                        .Select(t => new { t.ProfessorID, t.HorarioID, t.DesTruma, t.Status, t.MaxAlunos })
+                        .First();
+
+                    cb_horario.SelectedValue = turma.HorarioID;
+                    cb_nomeProfessor.SelectedValue = turma.ProfessorID;
+                    cb_status.SelectedValue = turma.Status;
+                    tb_nomeTurma.Text = turma.DesTruma;
+                    n_maxAlunos.Value = turma.MaxAlunos;
+                }
+            }
+        }
+
+        private void btn_novaTurma_Click(object sender, EventArgs e)
+        {
+            limparCampos();
+            tb_nomeTurma.Focus();
+            modo = 2;
+        }
+
+        private void btn_salvarEdicoes_Click(object sender, EventArgs e)
+        {
+            int linha = dgv_turmas.SelectedRows[0].Index;
+            if (modo != 0)
+            {
+                if (modo == 1)
+                {
+                    using (var ctx = new AcademiaContexto())
+                    {
+                        var turma = ctx.Turmas.Find(idTurma);
+                        turma.ProfessorID = Convert.ToInt32(cb_nomeProfessor.SelectedValue);
+                        turma.MaxAlunos = Convert.ToInt32(Math.Round(n_maxAlunos.Value, 0));
+                        turma.HorarioID = Convert.ToInt32(cb_horario.SelectedValue);
+                        turma.DesTruma = tb_nomeTurma.Text;
+                        turma.Status = cb_status.SelectedValue.ToString();
+                        ctx.SaveChanges();
+                        dgv_turmas.Rows[linha].Cells[1].Value = tb_nomeTurma.Text;
+                        dgv_turmas.Rows[linha].Cells[2].Value = cb_horario.Text;
+                        MessageBox.Show("Dados Editados", "Mensagem");
+                    }
+                }
+                else
+                {
+                    using (var ctx = new AcademiaContexto())
+                    {
+                        var exisTurma = ctx.Turmas.SingleOrDefault(t => t.DesTruma == tb_nomeTurma.Text);
+                        if (exisTurma == null)
+                        {
+                            Turma turma = new Turma();
+                            turma.ProfessorID = Convert.ToInt32(cb_nomeProfessor.SelectedValue);
+                            turma.MaxAlunos = Convert.ToInt32(Math.Round(n_maxAlunos.Value, 0));
+                            turma.HorarioID = Convert.ToInt32(cb_horario.SelectedValue);
+                            turma.DesTruma = tb_nomeTurma.Text;
+                            turma.Status = cb_status.SelectedValue.ToString();
+                            ctx.Turmas.Add(turma);
+                            ctx.SaveChanges();
+                            carregarTurmas(40, 175, 90);
+                            MessageBox.Show("Turma adicionada!", "Mensagem");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Já existe uma turma com esse nome.", "Erro");
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        private void btn_excluirTurma_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja excluir essa turma?", "Mensagem", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                int linha = dgv_turmas.SelectedRows[0].Index;
+                using (var ctx = new AcademiaContexto())
+                {
+                    var turma = ctx.Turmas.Find(Convert.ToInt32(dgv_turmas.Rows[linha].Cells[0].Value));
+                    ctx.Remove(turma);
+                    ctx.SaveChanges();
+                    MessageBox.Show("Turma excluida!", "Mensagem");
+                    dgv_turmas.Rows.Remove(dgv_turmas.SelectedRows[0]);
+                }
+            }
         }
     }
 }

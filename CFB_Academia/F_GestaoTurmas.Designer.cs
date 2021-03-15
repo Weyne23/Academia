@@ -32,11 +32,11 @@ namespace CFB_Academia
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_turmas = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_novaTurma = new System.Windows.Forms.Button();
-            this.btn_salvarEdicoes = new System.Windows.Forms.Button();
-            this.btn_excluirTurma = new System.Windows.Forms.Button();
-            this.btn_imprimir = new System.Windows.Forms.Button();
             this.btn_fechar = new System.Windows.Forms.Button();
+            this.btn_imprimir = new System.Windows.Forms.Button();
+            this.btn_excluirTurma = new System.Windows.Forms.Button();
+            this.btn_salvarEdicoes = new System.Windows.Forms.Button();
+            this.btn_novaTurma = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cb_nomeProfessor = new System.Windows.Forms.ComboBox();
             this.n_maxAlunos = new System.Windows.Forms.NumericUpDown();
@@ -45,6 +45,10 @@ namespace CFB_Academia
             this.label3 = new System.Windows.Forms.Label();
             this.cb_horario = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tb_nomeTurma = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_vagasRestantes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_turmas)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.n_maxAlunos)).BeginInit();
@@ -72,6 +76,7 @@ namespace CFB_Academia
             this.dgv_turmas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_turmas.Size = new System.Drawing.Size(329, 401);
             this.dgv_turmas.TabIndex = 0;
+            this.dgv_turmas.SelectionChanged += new System.EventHandler(this.dgv_turmas_SelectionChanged);
             // 
             // panel1
             // 
@@ -86,46 +91,6 @@ namespace CFB_Academia
             this.panel1.Size = new System.Drawing.Size(628, 31);
             this.panel1.TabIndex = 1;
             // 
-            // btn_novaTurma
-            // 
-            this.btn_novaTurma.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_novaTurma.Location = new System.Drawing.Point(12, 3);
-            this.btn_novaTurma.Name = "btn_novaTurma";
-            this.btn_novaTurma.Size = new System.Drawing.Size(126, 23);
-            this.btn_novaTurma.TabIndex = 0;
-            this.btn_novaTurma.Text = "Nova Turma";
-            this.btn_novaTurma.UseVisualStyleBackColor = true;
-            // 
-            // btn_salvarEdicoes
-            // 
-            this.btn_salvarEdicoes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_salvarEdicoes.Location = new System.Drawing.Point(142, 3);
-            this.btn_salvarEdicoes.Name = "btn_salvarEdicoes";
-            this.btn_salvarEdicoes.Size = new System.Drawing.Size(126, 23);
-            this.btn_salvarEdicoes.TabIndex = 1;
-            this.btn_salvarEdicoes.Text = "Salvar Edições";
-            this.btn_salvarEdicoes.UseVisualStyleBackColor = true;
-            // 
-            // btn_excluirTurma
-            // 
-            this.btn_excluirTurma.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_excluirTurma.Location = new System.Drawing.Point(274, 3);
-            this.btn_excluirTurma.Name = "btn_excluirTurma";
-            this.btn_excluirTurma.Size = new System.Drawing.Size(126, 23);
-            this.btn_excluirTurma.TabIndex = 2;
-            this.btn_excluirTurma.Text = "Excluir Turma";
-            this.btn_excluirTurma.UseVisualStyleBackColor = true;
-            // 
-            // btn_imprimir
-            // 
-            this.btn_imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_imprimir.Location = new System.Drawing.Point(406, 3);
-            this.btn_imprimir.Name = "btn_imprimir";
-            this.btn_imprimir.Size = new System.Drawing.Size(126, 23);
-            this.btn_imprimir.TabIndex = 3;
-            this.btn_imprimir.Text = "Imprimir Turma";
-            this.btn_imprimir.UseVisualStyleBackColor = true;
-            // 
             // btn_fechar
             // 
             this.btn_fechar.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -137,10 +102,53 @@ namespace CFB_Academia
             this.btn_fechar.UseVisualStyleBackColor = true;
             this.btn_fechar.Click += new System.EventHandler(this.btn_fechar_Click);
             // 
+            // btn_imprimir
+            // 
+            this.btn_imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_imprimir.Location = new System.Drawing.Point(406, 3);
+            this.btn_imprimir.Name = "btn_imprimir";
+            this.btn_imprimir.Size = new System.Drawing.Size(126, 23);
+            this.btn_imprimir.TabIndex = 3;
+            this.btn_imprimir.Text = "Imprimir Turma";
+            this.btn_imprimir.UseVisualStyleBackColor = true;
+            // 
+            // btn_excluirTurma
+            // 
+            this.btn_excluirTurma.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_excluirTurma.Location = new System.Drawing.Point(274, 3);
+            this.btn_excluirTurma.Name = "btn_excluirTurma";
+            this.btn_excluirTurma.Size = new System.Drawing.Size(126, 23);
+            this.btn_excluirTurma.TabIndex = 2;
+            this.btn_excluirTurma.Text = "Excluir Turma";
+            this.btn_excluirTurma.UseVisualStyleBackColor = true;
+            this.btn_excluirTurma.Click += new System.EventHandler(this.btn_excluirTurma_Click);
+            // 
+            // btn_salvarEdicoes
+            // 
+            this.btn_salvarEdicoes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_salvarEdicoes.Location = new System.Drawing.Point(142, 3);
+            this.btn_salvarEdicoes.Name = "btn_salvarEdicoes";
+            this.btn_salvarEdicoes.Size = new System.Drawing.Size(126, 23);
+            this.btn_salvarEdicoes.TabIndex = 1;
+            this.btn_salvarEdicoes.Text = "Salvar Edições";
+            this.btn_salvarEdicoes.UseVisualStyleBackColor = true;
+            this.btn_salvarEdicoes.Click += new System.EventHandler(this.btn_salvarEdicoes_Click);
+            // 
+            // btn_novaTurma
+            // 
+            this.btn_novaTurma.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_novaTurma.Location = new System.Drawing.Point(12, 3);
+            this.btn_novaTurma.Name = "btn_novaTurma";
+            this.btn_novaTurma.Size = new System.Drawing.Size(126, 23);
+            this.btn_novaTurma.TabIndex = 0;
+            this.btn_novaTurma.Text = "Nova Turma";
+            this.btn_novaTurma.UseVisualStyleBackColor = true;
+            this.btn_novaTurma.Click += new System.EventHandler(this.btn_novaTurma_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(344, 12);
+            this.label1.Location = new System.Drawing.Point(344, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 3;
@@ -149,14 +157,14 @@ namespace CFB_Academia
             // cb_nomeProfessor
             // 
             this.cb_nomeProfessor.FormattingEnabled = true;
-            this.cb_nomeProfessor.Location = new System.Drawing.Point(347, 28);
+            this.cb_nomeProfessor.Location = new System.Drawing.Point(347, 85);
             this.cb_nomeProfessor.Name = "cb_nomeProfessor";
             this.cb_nomeProfessor.Size = new System.Drawing.Size(266, 21);
-            this.cb_nomeProfessor.TabIndex = 1;
+            this.cb_nomeProfessor.TabIndex = 2;
             // 
             // n_maxAlunos
             // 
-            this.n_maxAlunos.Location = new System.Drawing.Point(347, 88);
+            this.n_maxAlunos.Location = new System.Drawing.Point(347, 145);
             this.n_maxAlunos.Minimum = new decimal(new int[] {
             1,
             0,
@@ -164,7 +172,7 @@ namespace CFB_Academia
             0});
             this.n_maxAlunos.Name = "n_maxAlunos";
             this.n_maxAlunos.Size = new System.Drawing.Size(143, 20);
-            this.n_maxAlunos.TabIndex = 2;
+            this.n_maxAlunos.TabIndex = 3;
             this.n_maxAlunos.Value = new decimal(new int[] {
             1,
             0,
@@ -174,7 +182,7 @@ namespace CFB_Academia
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(344, 72);
+            this.label2.Location = new System.Drawing.Point(344, 129);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 13);
             this.label2.TabIndex = 6;
@@ -183,15 +191,15 @@ namespace CFB_Academia
             // cb_status
             // 
             this.cb_status.FormattingEnabled = true;
-            this.cb_status.Location = new System.Drawing.Point(496, 86);
+            this.cb_status.Location = new System.Drawing.Point(496, 143);
             this.cb_status.Name = "cb_status";
             this.cb_status.Size = new System.Drawing.Size(117, 21);
-            this.cb_status.TabIndex = 3;
+            this.cb_status.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(493, 70);
+            this.label3.Location = new System.Drawing.Point(493, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 8;
@@ -200,25 +208,61 @@ namespace CFB_Academia
             // cb_horario
             // 
             this.cb_horario.FormattingEnabled = true;
-            this.cb_horario.Location = new System.Drawing.Point(347, 147);
+            this.cb_horario.Location = new System.Drawing.Point(347, 204);
             this.cb_horario.Name = "cb_horario";
-            this.cb_horario.Size = new System.Drawing.Size(266, 21);
-            this.cb_horario.TabIndex = 4;
+            this.cb_horario.Size = new System.Drawing.Size(143, 21);
+            this.cb_horario.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(344, 131);
+            this.label4.Location = new System.Drawing.Point(344, 188);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Horário";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(344, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Nome da Turma";
+            // 
+            // tb_nomeTurma
+            // 
+            this.tb_nomeTurma.Location = new System.Drawing.Point(347, 29);
+            this.tb_nomeTurma.Name = "tb_nomeTurma";
+            this.tb_nomeTurma.Size = new System.Drawing.Size(266, 20);
+            this.tb_nomeTurma.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(493, 189);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Vagas Restantes";
+            // 
+            // tb_vagasRestantes
+            // 
+            this.tb_vagasRestantes.Location = new System.Drawing.Point(496, 205);
+            this.tb_vagasRestantes.Name = "tb_vagasRestantes";
+            this.tb_vagasRestantes.Size = new System.Drawing.Size(117, 20);
+            this.tb_vagasRestantes.TabIndex = 13;
             // 
             // F_GestaoTurmas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 450);
+            this.Controls.Add(this.tb_vagasRestantes);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tb_nomeTurma);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cb_horario);
             this.Controls.Add(this.label3);
@@ -261,5 +305,9 @@ namespace CFB_Academia
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cb_horario;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tb_nomeTurma;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tb_vagasRestantes;
     }
 }
