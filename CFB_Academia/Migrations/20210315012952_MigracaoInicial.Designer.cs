@@ -10,7 +10,7 @@ using System;
 namespace CFB_Academia.Migrations
 {
     [DbContext(typeof(AcademiaContexto))]
-    [Migration("20210308231022_MigracaoInicial")]
+    [Migration("20210315012952_MigracaoInicial")]
     partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,6 +18,35 @@ namespace CFB_Academia.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+
+            modelBuilder.Entity("CFB_Academia.Models.Aluno", b =>
+                {
+                    b.Property<int>("AlunoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("AlunoID");
+
+                    b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("CFB_Academia.Models.AlunoTurma", b =>
+                {
+                    b.Property<int>("AlunoID");
+
+                    b.Property<int>("TurmaID");
+
+                    b.HasKey("AlunoID", "TurmaID");
+
+                    b.HasIndex("TurmaID");
+
+                    b.ToTable("AlunoTurmas");
+                });
 
             modelBuilder.Entity("CFB_Academia.Models.Horario", b =>
                 {
@@ -50,7 +79,7 @@ namespace CFB_Academia.Migrations
                     b.Property<int>("TurmaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DesTruma");
+                    b.Property<string>("DesTurma");
 
                     b.Property<int>("HorarioID");
 
@@ -91,6 +120,19 @@ namespace CFB_Academia.Migrations
                     b.HasKey("UsuarioID");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("CFB_Academia.Models.AlunoTurma", b =>
+                {
+                    b.HasOne("CFB_Academia.Models.Aluno", "Aluno")
+                        .WithMany("AlunoTurmas")
+                        .HasForeignKey("AlunoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CFB_Academia.Models.Turma", "Turma")
+                        .WithMany("AlunoTurmas")
+                        .HasForeignKey("TurmaID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CFB_Academia.Models.Turma", b =>

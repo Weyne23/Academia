@@ -45,7 +45,7 @@ namespace CFB_Academia
                                   select new
                                   {
                                       idTurma = t.TurmaID,
-                                      desTurma = t.DesTruma,
+                                      desTurma = t.DesTurma,
                                       desHorario = h.DesHorario,
                                   });
                     foreach (var t in turmas)
@@ -144,13 +144,13 @@ namespace CFB_Academia
                 using (var ctx = new AcademiaContexto())
                 {
                     var turma = ctx.Turmas.Where(t => t.TurmaID == idTurma)
-                        .Select(t => new { t.ProfessorID, t.HorarioID, t.DesTruma, t.Status, t.MaxAlunos })
+                        .Select(t => new { t.ProfessorID, t.HorarioID, t.DesTurma, t.Status, t.MaxAlunos })
                         .First();
 
                     cb_horario.SelectedValue = turma.HorarioID;
                     cb_nomeProfessor.SelectedValue = turma.ProfessorID;
                     cb_status.SelectedValue = turma.Status;
-                    tb_nomeTurma.Text = turma.DesTruma;
+                    tb_nomeTurma.Text = turma.DesTurma;
                     n_maxAlunos.Value = turma.MaxAlunos;
                 }
             }
@@ -165,18 +165,18 @@ namespace CFB_Academia
 
         private void btn_salvarEdicoes_Click(object sender, EventArgs e)
         {
-            int linha = dgv_turmas.SelectedRows[0].Index;
             if (modo != 0)
             {
                 if (modo == 1)
                 {
+                    int linha = dgv_turmas.SelectedRows[0].Index;
                     using (var ctx = new AcademiaContexto())
                     {
                         var turma = ctx.Turmas.Find(idTurma);
                         turma.ProfessorID = Convert.ToInt32(cb_nomeProfessor.SelectedValue);
                         turma.MaxAlunos = Convert.ToInt32(Math.Round(n_maxAlunos.Value, 0));
                         turma.HorarioID = Convert.ToInt32(cb_horario.SelectedValue);
-                        turma.DesTruma = tb_nomeTurma.Text;
+                        turma.DesTurma = tb_nomeTurma.Text;
                         turma.Status = cb_status.SelectedValue.ToString();
                         ctx.SaveChanges();
                         dgv_turmas.Rows[linha].Cells[1].Value = tb_nomeTurma.Text;
@@ -188,14 +188,14 @@ namespace CFB_Academia
                 {
                     using (var ctx = new AcademiaContexto())
                     {
-                        var exisTurma = ctx.Turmas.SingleOrDefault(t => t.DesTruma == tb_nomeTurma.Text);
+                        var exisTurma = ctx.Turmas.SingleOrDefault(t => t.DesTurma == tb_nomeTurma.Text);
                         if (exisTurma == null)
                         {
                             Turma turma = new Turma();
                             turma.ProfessorID = Convert.ToInt32(cb_nomeProfessor.SelectedValue);
                             turma.MaxAlunos = Convert.ToInt32(Math.Round(n_maxAlunos.Value, 0));
                             turma.HorarioID = Convert.ToInt32(cb_horario.SelectedValue);
-                            turma.DesTruma = tb_nomeTurma.Text;
+                            turma.DesTurma = tb_nomeTurma.Text;
                             turma.Status = cb_status.SelectedValue.ToString();
                             ctx.Turmas.Add(turma);
                             ctx.SaveChanges();

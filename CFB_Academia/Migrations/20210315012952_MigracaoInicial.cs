@@ -9,6 +9,21 @@ namespace CFB_Academia.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Alunos",
+                columns: table => new
+                {
+                    AlunoID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nome = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Telefone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alunos", x => x.AlunoID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Horarios",
                 columns: table => new
                 {
@@ -58,7 +73,7 @@ namespace CFB_Academia.Migrations
                 {
                     TurmaID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DesTruma = table.Column<string>(nullable: true),
+                    DesTurma = table.Column<string>(nullable: true),
                     HorarioID = table.Column<int>(nullable: false),
                     MaxAlunos = table.Column<int>(nullable: false, defaultValue: -1)
                         .Annotation("Sqlite:Autoincrement", true),
@@ -82,6 +97,35 @@ namespace CFB_Academia.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AlunoTurmas",
+                columns: table => new
+                {
+                    AlunoID = table.Column<int>(nullable: false),
+                    TurmaID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlunoTurmas", x => new { x.AlunoID, x.TurmaID });
+                    table.ForeignKey(
+                        name: "FK_AlunoTurmas_Alunos_AlunoID",
+                        column: x => x.AlunoID,
+                        principalTable: "Alunos",
+                        principalColumn: "AlunoID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AlunoTurmas_Turmas_TurmaID",
+                        column: x => x.TurmaID,
+                        principalTable: "Turmas",
+                        principalColumn: "TurmaID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlunoTurmas_TurmaID",
+                table: "AlunoTurmas",
+                column: "TurmaID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Turmas_HorarioID",
                 table: "Turmas",
@@ -96,10 +140,16 @@ namespace CFB_Academia.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Turmas");
+                name: "AlunoTurmas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Alunos");
+
+            migrationBuilder.DropTable(
+                name: "Turmas");
 
             migrationBuilder.DropTable(
                 name: "Horarios");

@@ -208,12 +208,14 @@
       <DependentUpon>F_NovoUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Globais.cs" />
-    <Compile Include="Migrations\20210308231022_MigracaoInicial.cs" />
-    <Compile Include="Migrations\20210308231022_MigracaoInicial.designer.cs">
-      <DependentUpon>20210308231022_MigracaoInicial.cs</DependentUpon>
+    <Compile Include="Migrations\20210315012952_MigracaoInicial.cs" />
+    <Compile Include="Migrations\20210315012952_MigracaoInicial.designer.cs">
+      <DependentUpon>20210315012952_MigracaoInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AcademiaContextoModelSnapshot.cs" />
     <Compile Include="Models\AcademiaContexto.cs" />
+    <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\AlunoTurma.cs" />
     <Compile Include="Models\Horario.cs" />
     <Compile Include="Models\Professor.cs" />
     <Compile Include="Models\Turma.cs" />
