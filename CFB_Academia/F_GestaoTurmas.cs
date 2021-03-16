@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,22 @@ namespace CFB_Academia
             cb_nomeProfessor.SelectedIndex = -1;
             n_maxAlunos.Value = 1;
             cb_status.SelectedIndex = -1;
+            tb_vagasRestantes.Clear();
+        }
+
+        public string numVagas(int maxAlunos)
+        {
+            using (var ctx = new AcademiaContexto())
+            {
+                var numAluno = ctx.AlunoTurmas // Query para numero de alunos
+                            .Where(at => at.TurmaID == idTurma)
+                            .Include(a => a.Aluno)
+                            .Where(a => a.Aluno.Status == "A")
+                            .Count();
+
+                int numVagas = maxAlunos - numAluno;
+                return numVagas.ToString();
+            } 
         }
 
         private void carregarTurmas(int tamId, int tamTurma, int tamHorario)
@@ -152,6 +169,7 @@ namespace CFB_Academia
                     cb_status.SelectedValue = turma.Status;
                     tb_nomeTurma.Text = turma.DesTurma;
                     n_maxAlunos.Value = turma.MaxAlunos;
+                    tb_vagasRestantes.Text = numVagas(turma.MaxAlunos);
                 }
             }
         }
@@ -181,6 +199,7 @@ namespace CFB_Academia
                         ctx.SaveChanges();
                         dgv_turmas.Rows[linha].Cells[1].Value = tb_nomeTurma.Text;
                         dgv_turmas.Rows[linha].Cells[2].Value = cb_horario.Text;
+                        tb_vagasRestantes.Text = numVagas(turma.MaxAlunos);
                         MessageBox.Show("Dados Editados", "Mensagem");
                     }
                 }

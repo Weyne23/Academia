@@ -249,10 +249,13 @@ namespace CFB_Academia
             // 
             // tb_vagasRestantes
             // 
+            this.tb_vagasRestantes.Cursor = System.Windows.Forms.Cursors.No;
             this.tb_vagasRestantes.Location = new System.Drawing.Point(496, 205);
             this.tb_vagasRestantes.Name = "tb_vagasRestantes";
+            this.tb_vagasRestantes.ReadOnly = true;
             this.tb_vagasRestantes.Size = new System.Drawing.Size(117, 20);
             this.tb_vagasRestantes.TabIndex = 13;
+            this.tb_vagasRestantes.TabStop = false;
             // 
             // F_GestaoTurmas
             // 
