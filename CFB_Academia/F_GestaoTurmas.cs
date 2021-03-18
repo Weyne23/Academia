@@ -9,6 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace CFB_Academia
 {
@@ -246,5 +250,57 @@ namespace CFB_Academia
                 }
             }
         }
+
+        private void btn_imprimir_Click(object sender, EventArgs e)
+        {
+            string nomeArquivo = Globais.caminho + @"\Turmas.pdf";
+            FileStream arquivoPDF = new FileStream(nomeArquivo, FileMode.Create);
+            Document doc = new Document(PageSize.A4);
+            PdfWriter escritorPDF = PdfWriter.GetInstance(doc, arquivoPDF);
+
+            iTextSharp.text.Image imagem = iTextSharp.text.Image.GetInstance(Globais.caminho + @"\imgs\logotipo.jpg");
+            imagem.ScaleToFit(120f, 120f);
+            imagem.Alignment = Element.ALIGN_CENTER;
+            //imagem.SetAbsolutePosition(100f, 700f); // pocisao x/-y
+
+            string dados = "";
+            Paragraph paragrafo1 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 20, (int)System.Drawing.FontStyle.Bold));
+            paragrafo1.Add("Projeto Academia.\n");
+            paragrafo1.Alignment = Element.ALIGN_CENTER;
+            paragrafo1.Font = new iTextSharp.text.Font(iTextSharp.text.Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold);
+            paragrafo1.Add("Relatório de Turmas\n\n");
+
+            PdfPTable tabela = new PdfPTable(3);
+            tabela.DefaultCell.FixedHeight = 20;
+
+            tabela.AddCell("ID Turma");
+            tabela.AddCell("Turma");
+            tabela.AddCell("Horário");
+
+
+            using (var ctx = new AcademiaContexto())
+            {
+                var turmas = ctx.Turmas.ToList();
+                foreach (var t in turmas)
+                {
+                    ctx.Entry(t).Reference(h => h.Horario).Load();
+                    tabela.AddCell(t.TurmaID.ToString());
+                    tabela.AddCell(t.DesTurma);
+                    tabela.AddCell(t.Horario.DesHorario);
+                }
+            }
+
+            doc.Open();
+            doc.Add(imagem);
+            doc.Add(paragrafo1);
+            doc.Add(tabela);
+            doc.Close();
+
+            if (MessageBox.Show("Deseja abrir o relatório das turmas?", "Mensagem", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start(Globais.caminho + @"\Turmas.pdf");
+            }
+        }
     }
 }
+

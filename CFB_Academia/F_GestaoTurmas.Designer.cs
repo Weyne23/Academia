@@ -111,6 +111,7 @@ namespace CFB_Academia
             this.btn_imprimir.TabIndex = 3;
             this.btn_imprimir.Text = "Imprimir Turma";
             this.btn_imprimir.UseVisualStyleBackColor = true;
+            this.btn_imprimir.Click += new System.EventHandler(this.btn_imprimir_Click);
             // 
             // btn_excluirTurma
             // 
