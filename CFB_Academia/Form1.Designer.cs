@@ -46,10 +46,11 @@ namespace CFB_Academia
             this.bancoDeDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.professoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horáriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.turmasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.turmasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gerenciarAlunosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ledLogado)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -131,7 +132,8 @@ namespace CFB_Academia
             // alunosToolStripMenuItem
             // 
             this.alunosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.novoAlunoToolStripMenuItem});
+            this.novoAlunoToolStripMenuItem,
+            this.gerenciarAlunosToolStripMenuItem});
             this.alunosToolStripMenuItem.Name = "alunosToolStripMenuItem";
             this.alunosToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.alunosToolStripMenuItem.Text = "Alunos";
@@ -139,7 +141,7 @@ namespace CFB_Academia
             // novoAlunoToolStripMenuItem
             // 
             this.novoAlunoToolStripMenuItem.Name = "novoAlunoToolStripMenuItem";
-            this.novoAlunoToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.novoAlunoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.novoAlunoToolStripMenuItem.Text = "Novo Aluno";
             this.novoAlunoToolStripMenuItem.Click += new System.EventHandler(this.novoAlunoToolStripMenuItem_Click);
             // 
@@ -186,23 +188,30 @@ namespace CFB_Academia
             // bancoDeDadosToolStripMenuItem
             // 
             this.bancoDeDadosToolStripMenuItem.Name = "bancoDeDadosToolStripMenuItem";
-            this.bancoDeDadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bancoDeDadosToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.bancoDeDadosToolStripMenuItem.Text = "Banco de Dados";
             this.bancoDeDadosToolStripMenuItem.Click += new System.EventHandler(this.bancoDeDadosToolStripMenuItem_Click);
             // 
             // professoresToolStripMenuItem
             // 
             this.professoresToolStripMenuItem.Name = "professoresToolStripMenuItem";
-            this.professoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.professoresToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.professoresToolStripMenuItem.Text = "Professores";
             this.professoresToolStripMenuItem.Click += new System.EventHandler(this.professoresToolStripMenuItem_Click);
             // 
             // horáriosToolStripMenuItem
             // 
             this.horáriosToolStripMenuItem.Name = "horáriosToolStripMenuItem";
-            this.horáriosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.horáriosToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.horáriosToolStripMenuItem.Text = "Horários";
             this.horáriosToolStripMenuItem.Click += new System.EventHandler(this.horáriosToolStripMenuItem_Click);
+            // 
+            // turmasToolStripMenuItem
+            // 
+            this.turmasToolStripMenuItem.Name = "turmasToolStripMenuItem";
+            this.turmasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.turmasToolStripMenuItem.Text = "Turmas";
+            this.turmasToolStripMenuItem.Click += new System.EventHandler(this.turmasToolStripMenuItem_Click);
             // 
             // loginToolStripMenuItem
             // 
@@ -227,12 +236,11 @@ namespace CFB_Academia
             this.deslogarToolStripMenuItem.Text = "Deslogar";
             this.deslogarToolStripMenuItem.Click += new System.EventHandler(this.deslogarToolStripMenuItem_Click);
             // 
-            // turmasToolStripMenuItem
+            // gerenciarAlunosToolStripMenuItem
             // 
-            this.turmasToolStripMenuItem.Name = "turmasToolStripMenuItem";
-            this.turmasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.turmasToolStripMenuItem.Text = "Turmas";
-            this.turmasToolStripMenuItem.Click += new System.EventHandler(this.turmasToolStripMenuItem_Click);
+            this.gerenciarAlunosToolStripMenuItem.Name = "gerenciarAlunosToolStripMenuItem";
+            this.gerenciarAlunosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gerenciarAlunosToolStripMenuItem.Text = "Gerenciar Alunos";
             // 
             // Form1
             // 
@@ -278,6 +286,7 @@ namespace CFB_Academia
         private System.Windows.Forms.ToolStripMenuItem horáriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem professoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turmasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gerenciarAlunosToolStripMenuItem;
     }
 }
 

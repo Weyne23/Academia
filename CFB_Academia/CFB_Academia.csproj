@@ -177,6 +177,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_Alunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Alunos.Designer.cs">
+      <DependentUpon>F_Alunos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GerenciarAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GerenciarAlunos.Designer.cs">
+      <DependentUpon>F_GerenciarAlunos.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_GestaoProfessores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +242,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Alunos.resx">
+      <DependentUpon>F_Alunos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GerenciarAlunos.resx">
+      <DependentUpon>F_GerenciarAlunos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_GestaoProfessores.resx">
       <DependentUpon>F_GestaoProfessores.cs</DependentUpon>

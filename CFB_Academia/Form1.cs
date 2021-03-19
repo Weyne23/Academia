@@ -87,14 +87,8 @@ namespace CFB_Academia
 
         private void novoAlunoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Globais.logado)
-            {
-                //ToDo
-            }
-            else
-            {
-                MessageBox.Show("É necessario ter um usuario logado.");
-            }
+            F_Alunos f_Alunos = new F_Alunos();
+            abreForm(1, f_Alunos);
         }
 
         private void horáriosToolStripMenuItem_Click(object sender, EventArgs e)
