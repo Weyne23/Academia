@@ -14,29 +14,25 @@ namespace CFB_Academia
 {
     public partial class F_Alunos : Form
     {
-        List<int> selecionados = new List<int>();
         public F_Alunos()
         {
             InitializeComponent();
         }
 
-        private void F_Alunos_Load(object sender, EventArgs e)
+        private DataTable carregarTurmas()
         {
-            Dictionary<string, string> status = new Dictionary<string, string>();
             DataTable dt = new DataTable();
-            status.Add("A", "Ativo");
-            status.Add("B", "Bloqueado");
-            status.Add("C", "Cancelado");
-            cb_status.DataSource = new BindingSource(status, null);
-
-            cb_status.DisplayMember = "Value";
-            cb_status.ValueMember = "Key";
-
+            dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("Turma", typeof(string));
+            dt.Columns.Add("Horário", typeof(string));
+            dt.Columns.Add("Max. Alunos", typeof(string));
+            dt.Columns.Add("Qtd. Alunos", typeof(string));
             using (var ctx = new AcademiaContexto())
             {
                 var turmas = (from t in ctx.Turmas
                               join h in ctx.Horarios on t.HorarioID equals h.HorarioID
                               where t.Status == "A"
+                              orderby h.DesHorario
                               select new
                               {
                                   idTurma = t.TurmaID,
@@ -44,8 +40,7 @@ namespace CFB_Academia
                                   maxAlunos = t.MaxAlunos,
                                   desHorario = h.DesHorario,
                               });
-                dt.Columns.Add("Id", typeof(int));
-                dt.Columns.Add("Turma", typeof(string));
+
                 foreach (var t in turmas)
                 {
                     var numAlunos = ctx.AlunoTurmas.Where(at => at.TurmaID == t.idTurma)
@@ -55,14 +50,34 @@ namespace CFB_Academia
 
                     if (numAlunos < t.maxAlunos)
                     {
-                        dt.Rows.Add(t.idTurma, t.desTurma + " / " + t.desHorario);
+                        dt.Rows.Add(t.idTurma, t.desTurma, t.desHorario, t.maxAlunos, numAlunos);
                     }
                 }
-
-                ((ListBox)clb_turmas).DataSource = dt;
-                ((ListBox)clb_turmas).ValueMember = "Id";
-                ((ListBox)clb_turmas).DisplayMember = "Turma";
             }
+
+            return dt;
+        }
+
+        private void F_Alunos_Load(object sender, EventArgs e)
+        {
+            Dictionary<string, string> status = new Dictionary<string, string>();
+            status.Add("A", "Ativo");
+            status.Add("B", "Bloqueado");
+            status.Add("C", "Cancelado");
+            cb_status.DataSource = new BindingSource(status, null);
+
+            cb_status.DisplayMember = "Value";
+            cb_status.ValueMember = "Key";
+
+            DataTable dt = carregarTurmas();
+
+            dgv_turmas.DataSource = dt;
+            dgv_turmas.Columns[0].Width = 30;
+            dgv_turmas.Columns[1].Width = 60;
+            dgv_turmas.Columns[2].Width = 120;
+            dgv_turmas.Columns[3].Width = 90;
+            dgv_turmas.Columns[4].Width = 50;
+            dgv_turmas.Columns[5].Width = 50;
         }
 
         private void btn_novoAluno_Click(object sender, EventArgs e)
@@ -70,13 +85,13 @@ namespace CFB_Academia
             tb_nomeAluno.Enabled = true;
             cb_status.Enabled = true;
             mtb_telefone.Enabled = true;
-            clb_turmas.Enabled = true;
+            dgv_turmas.Enabled = true;
             tb_nomeAluno.Clear();
             tb_plano.Clear();
 
-            foreach (int i in clb_turmas.CheckedIndices)
+            for (int i = 0; i < dgv_turmas.Rows.Count; i++)
             {
-                clb_turmas.SetItemChecked(i, false);
+                dgv_turmas.Rows[i].Cells[0].Value = 0;
             }
 
             cb_status.SelectedIndex = -1;
@@ -85,7 +100,6 @@ namespace CFB_Academia
             btn_gravarAluno.Enabled = true;
             btn_cancelar.Enabled = true;
             btn_novoAluno.Enabled = false;
-            selecionados.Clear();
         }
 
         private void btn_cancelar_Click(object sender, EventArgs e)
@@ -93,13 +107,13 @@ namespace CFB_Academia
             tb_nomeAluno.Enabled = false;
             cb_status.Enabled = false;
             mtb_telefone.Enabled = false;
-            clb_turmas.Enabled = false;
+            dgv_turmas.Enabled = false;
             tb_nomeAluno.Clear();
             tb_plano.Clear();
 
-            foreach (int i in clb_turmas.CheckedIndices)
+            for (int i = 0; i < dgv_turmas.Rows.Count; i++)
             {
-                clb_turmas.SetItemChecked(i, false);
+                dgv_turmas.Rows[i].Cells[0].Value = 0;
             }
 
             cb_status.SelectedIndex = -1;
@@ -108,7 +122,6 @@ namespace CFB_Academia
             btn_gravarAluno.Enabled = false;
             btn_cancelar.Enabled = false;
             btn_novoAluno.Enabled = true;
-            selecionados.Clear();
         }
 
         private void btn_fechar_Click(object sender, EventArgs e)
@@ -119,50 +132,45 @@ namespace CFB_Academia
         private void btn_gravarAluno_Click(object sender, EventArgs e)
         {
             Aluno aluno = new Aluno();
-            if (cb_status.Text == "" || tb_nomeAluno.Text == "" || aluno.Telefone == "") 
+            if (cb_status.Text == "" || tb_nomeAluno.Text == "" || aluno.Telefone == "")
             {
                 MessageBox.Show("Campos \"Nome\", \"Status\" e \"Telefone\" obrigratorios.", "Erro");
             }
             else
             {
-                if(selecionados.Count > 0)
+                using (var ctx = new AcademiaContexto())
                 {
-                    using (var ctx = new AcademiaContexto())
+                    aluno.Nome = tb_nomeAluno.Text;
+                    aluno.Telefone = mtb_telefone.Text;
+                    aluno.Status = cb_status.SelectedValue.ToString();
+
+
+                    for (int i = 0; i < dgv_turmas.Rows.Count; i++)
                     {
-                        aluno.Nome = tb_nomeAluno.Text;
-                        aluno.Telefone = mtb_telefone.Text;
-                        aluno.Status = cb_status.SelectedValue.ToString();
-                        foreach (var i in selecionados)
+                        if (dgv_turmas.Rows[i].Cells[0].Value.ToString() == "1")
                         {
-                            var turma = ctx.Turmas.Find(i);
+                            var turma = ctx.Turmas.Find(Convert.ToInt32(dgv_turmas.Rows[i].Cells[1].Value));
                             ctx.Add(new AlunoTurma { Aluno = aluno, Turma = turma });
                         }
+                    }
 
-                        ctx.SaveChanges();
-                    }
-                }
-                else
-                {
-                    using (var ctx = new AcademiaContexto())
-                    {
-                        aluno.Nome = tb_nomeAluno.Text;
-                        aluno.Telefone = mtb_telefone.Text;
-                        aluno.Status = cb_status.SelectedValue.ToString();
-                        ctx.Add(aluno);
-                        ctx.SaveChanges();
-                    }
+                    ctx.Add(aluno);
+                    ctx.SaveChanges();
+
+                    DataTable dt = carregarTurmas();
+                    dgv_turmas.DataSource = dt;
                 }
 
                 tb_nomeAluno.Enabled = false;
                 cb_status.Enabled = false;
                 mtb_telefone.Enabled = false;
-                clb_turmas.Enabled = false;
+                dgv_turmas.Enabled = false;
                 tb_nomeAluno.Clear();
                 tb_plano.Clear();
 
-                foreach (int i in clb_turmas.CheckedIndices)
+                for (int i = 0; i < dgv_turmas.Rows.Count; i++)
                 {
-                    clb_turmas.SetItemChecked(i, false);
+                    dgv_turmas.Rows[i].Cells[0].Value = 0;
                 }
 
                 cb_status.SelectedIndex = -1;
@@ -171,17 +179,20 @@ namespace CFB_Academia
                 btn_gravarAluno.Enabled = false;
                 btn_cancelar.Enabled = false;
                 btn_novoAluno.Enabled = true;
-                selecionados.Clear();
                 MessageBox.Show("Aluno Adicionado", "Mensagem");
             }
         }
 
-        private void clb_turmas_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void dgv_turmas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!selecionados.Contains(Convert.ToInt32(((ListBox)clb_turmas).SelectedValue)))
-                selecionados.Add(Convert.ToInt32(((ListBox)clb_turmas).SelectedValue));
-            else if(selecionados.Contains(Convert.ToInt32(((ListBox)clb_turmas).SelectedValue)))
-                selecionados.Remove(Convert.ToInt32(((ListBox)clb_turmas).SelectedValue));
+            if (dgv_turmas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "0")
+            {
+                dgv_turmas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 1;
+            }
+            else if(dgv_turmas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "1")
+            {
+                dgv_turmas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+            }
         }
     }
 }
