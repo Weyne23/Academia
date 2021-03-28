@@ -53,25 +53,6 @@ namespace CFB_Academia
             Globais.logado = false;
         }
 
-        private void bancoDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Globais.logado)
-            {
-                if(Globais.nivel >= 3)
-                {
-                    //ToDo
-                }
-                else
-                {
-                    MessageBox.Show("Acesso negado!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("É necessario ter um usuario logado.");
-            }
-        }
-
         private void novoUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_NovoUsuario f_NovoUsuario = new F_NovoUsuario();
@@ -107,6 +88,12 @@ namespace CFB_Academia
         {
             F_GestaoTurmas f_GestaoTurmas = new F_GestaoTurmas();
             abreForm(3, f_GestaoTurmas);
+        }
+
+        private void gerenciarAlunosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_GestaoAlunos f_GestaoAlunos = new F_GestaoAlunos();
+            abreForm(1, f_GestaoAlunos);
         }
     }
 }

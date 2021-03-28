@@ -46,9 +46,12 @@ namespace CFB_Academia
             this.cb_status = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgv_turmas = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pb_fotoAluno = new System.Windows.Forms.PictureBox();
+            this.btn_addFoto = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_turmas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_fotoAluno)).BeginInit();
             this.SuspendLayout();
             // 
             // tb_nomeAluno
@@ -56,7 +59,7 @@ namespace CFB_Academia
             this.tb_nomeAluno.Enabled = false;
             this.tb_nomeAluno.Location = new System.Drawing.Point(12, 29);
             this.tb_nomeAluno.Name = "tb_nomeAluno";
-            this.tb_nomeAluno.Size = new System.Drawing.Size(321, 20);
+            this.tb_nomeAluno.Size = new System.Drawing.Size(324, 20);
             this.tb_nomeAluno.TabIndex = 0;
             // 
             // label1
@@ -71,7 +74,7 @@ namespace CFB_Academia
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(336, 13);
+            this.label2.Location = new System.Drawing.Point(244, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 2;
@@ -80,7 +83,7 @@ namespace CFB_Academia
             // mtb_telefone
             // 
             this.mtb_telefone.Enabled = false;
-            this.mtb_telefone.Location = new System.Drawing.Point(339, 29);
+            this.mtb_telefone.Location = new System.Drawing.Point(247, 70);
             this.mtb_telefone.Mask = "(00) 00000-0000";
             this.mtb_telefone.Name = "mtb_telefone";
             this.mtb_telefone.Size = new System.Drawing.Size(89, 20);
@@ -93,7 +96,7 @@ namespace CFB_Academia
             this.panel1.Controls.Add(this.btn_gravarAluno);
             this.panel1.Controls.Add(this.btn_novoAluno);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 310);
+            this.panel1.Location = new System.Drawing.Point(0, 358);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(439, 30);
             this.panel1.TabIndex = 12;
@@ -143,7 +146,7 @@ namespace CFB_Academia
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(210, 54);
+            this.label5.Location = new System.Drawing.Point(9, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 27;
@@ -152,7 +155,7 @@ namespace CFB_Academia
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 94);
+            this.label4.Location = new System.Drawing.Point(10, 137);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 26;
@@ -160,7 +163,7 @@ namespace CFB_Academia
             // 
             // btn_selPlano
             // 
-            this.btn_selPlano.Location = new System.Drawing.Point(404, 68);
+            this.btn_selPlano.Location = new System.Drawing.Point(216, 110);
             this.btn_selPlano.Name = "btn_selPlano";
             this.btn_selPlano.Size = new System.Drawing.Size(25, 23);
             this.btn_selPlano.TabIndex = 25;
@@ -170,10 +173,10 @@ namespace CFB_Academia
             // tb_plano
             // 
             this.tb_plano.Cursor = System.Windows.Forms.Cursors.No;
-            this.tb_plano.Location = new System.Drawing.Point(213, 70);
+            this.tb_plano.Location = new System.Drawing.Point(12, 112);
             this.tb_plano.Name = "tb_plano";
             this.tb_plano.ReadOnly = true;
-            this.tb_plano.Size = new System.Drawing.Size(192, 20);
+            this.tb_plano.Size = new System.Drawing.Size(206, 20);
             this.tb_plano.TabIndex = 24;
             // 
             // cb_status
@@ -182,7 +185,7 @@ namespace CFB_Academia
             this.cb_status.FormattingEnabled = true;
             this.cb_status.Location = new System.Drawing.Point(12, 70);
             this.cb_status.Name = "cb_status";
-            this.cb_status.Size = new System.Drawing.Size(195, 21);
+            this.cb_status.Size = new System.Drawing.Size(229, 21);
             this.cb_status.TabIndex = 21;
             // 
             // label3
@@ -207,29 +210,51 @@ namespace CFB_Academia
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_turmas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_turmas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_turmas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1});
             this.dgv_turmas.Enabled = false;
-            this.dgv_turmas.Location = new System.Drawing.Point(12, 110);
+            this.dgv_turmas.Location = new System.Drawing.Point(12, 153);
+            this.dgv_turmas.MultiSelect = false;
             this.dgv_turmas.Name = "dgv_turmas";
             this.dgv_turmas.ReadOnly = true;
             this.dgv_turmas.RowHeadersVisible = false;
-            this.dgv_turmas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_turmas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgv_turmas.Size = new System.Drawing.Size(416, 194);
             this.dgv_turmas.TabIndex = 29;
-            this.dgv_turmas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_turmas_CellClick);
+            this.dgv_turmas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_turmas_CellContentClick);
             // 
-            // Column1
+            // pb_fotoAluno
             // 
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
+            this.pb_fotoAluno.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pb_fotoAluno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_fotoAluno.Location = new System.Drawing.Point(342, 29);
+            this.pb_fotoAluno.Name = "pb_fotoAluno";
+            this.pb_fotoAluno.Size = new System.Drawing.Size(85, 113);
+            this.pb_fotoAluno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_fotoAluno.TabIndex = 30;
+            this.pb_fotoAluno.TabStop = false;
+            // 
+            // btn_addFoto
+            // 
+            this.btn_addFoto.Enabled = false;
+            this.btn_addFoto.Location = new System.Drawing.Point(342, 3);
+            this.btn_addFoto.Name = "btn_addFoto";
+            this.btn_addFoto.Size = new System.Drawing.Size(87, 23);
+            this.btn_addFoto.TabIndex = 31;
+            this.btn_addFoto.Text = "Add Foto";
+            this.btn_addFoto.UseVisualStyleBackColor = true;
+            this.btn_addFoto.Click += new System.EventHandler(this.btn_addFoto_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "JPG(*.jpg)|*.jpg|PNG(*.png)|*.png";
             // 
             // F_Alunos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 340);
+            this.ClientSize = new System.Drawing.Size(439, 388);
+            this.Controls.Add(this.btn_addFoto);
+            this.Controls.Add(this.pb_fotoAluno);
             this.Controls.Add(this.dgv_turmas);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -248,6 +273,7 @@ namespace CFB_Academia
             this.Load += new System.EventHandler(this.F_Alunos_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_turmas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_fotoAluno)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,6 +297,8 @@ namespace CFB_Academia
         private System.Windows.Forms.ComboBox cb_status;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgv_turmas;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.PictureBox pb_fotoAluno;
+        private System.Windows.Forms.Button btn_addFoto;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

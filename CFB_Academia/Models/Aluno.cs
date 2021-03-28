@@ -12,6 +12,7 @@ namespace CFB_Academia.Models
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public string Status { get; set; }
+        public string Foto { get; set; }
         public ICollection<AlunoTurma> AlunoTurmas { get; set; }
     }
 }
