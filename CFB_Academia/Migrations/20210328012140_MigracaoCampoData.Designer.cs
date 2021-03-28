@@ -11,9 +11,10 @@ using System;
 namespace CFB_Academia.Migrations
 {
     [DbContext(typeof(AcademiaContexto))]
-    partial class AcademiaContextoModelSnapshot : ModelSnapshot
+    [Migration("20210328012140_MigracaoCampoData")]
+    partial class MigracaoCampoData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
