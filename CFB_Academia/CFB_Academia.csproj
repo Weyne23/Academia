@@ -10,6 +10,7 @@
     <RootNamespace>CFB_Academia</RootNamespace>
     <AssemblyName>CFB_Academia</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -36,11 +37,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Sqlite.Core.2.0.1\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
@@ -169,8 +176,117 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_Alunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Alunos.Designer.cs">
+      <DependentUpon>F_Alunos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GerenciarAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GerenciarAlunos.Designer.cs">
+      <DependentUpon>F_GerenciarAlunos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GestaoAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GestaoAlunos.Designer.cs">
+      <DependentUpon>F_GestaoAlunos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GestaoProfessores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GestaoProfessores.Designer.cs">
+      <DependentUpon>F_GestaoProfessores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GestaoTurmas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GestaoTurmas.Designer.cs">
+      <DependentUpon>F_GestaoTurmas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_GestaoUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_GestaoUsuarios.Designer.cs">
+      <DependentUpon>F_GestaoUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_Horarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Horarios.Designer.cs">
+      <DependentUpon>F_Horarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Login.Designer.cs">
+      <DependentUpon>F_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_NovoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_NovoUsuario.Designer.cs">
+      <DependentUpon>F_NovoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globais.cs" />
+    <Compile Include="Migrations\20210315012952_MigracaoInicial.cs" />
+    <Compile Include="Migrations\20210315012952_MigracaoInicial.designer.cs">
+      <DependentUpon>20210315012952_MigracaoInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210325004731_MigracaoAddCampoFoto.cs" />
+    <Compile Include="Migrations\20210325004731_MigracaoAddCampoFoto.designer.cs">
+      <DependentUpon>20210325004731_MigracaoAddCampoFoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210328012140_MigracaoCampoData.cs" />
+    <Compile Include="Migrations\20210328012140_MigracaoCampoData.designer.cs">
+      <DependentUpon>20210328012140_MigracaoCampoData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210328023513_MigracaoCampoPlanoAluno.cs" />
+    <Compile Include="Migrations\20210328023513_MigracaoCampoPlanoAluno.designer.cs">
+      <DependentUpon>20210328023513_MigracaoCampoPlanoAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AcademiaContextoModelSnapshot.cs" />
+    <Compile Include="Models\AcademiaContexto.cs" />
+    <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\AlunoTurma.cs" />
+    <Compile Include="Models\Horario.cs" />
+    <Compile Include="Models\Professor.cs" />
+    <Compile Include="Models\Turma.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Alunos.resx">
+      <DependentUpon>F_Alunos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GerenciarAlunos.resx">
+      <DependentUpon>F_GerenciarAlunos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GestaoAlunos.resx">
+      <DependentUpon>F_GestaoAlunos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GestaoProfessores.resx">
+      <DependentUpon>F_GestaoProfessores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GestaoTurmas.resx">
+      <DependentUpon>F_GestaoTurmas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_GestaoUsuarios.resx">
+      <DependentUpon>F_GestaoUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Horarios.resx">
+      <DependentUpon>F_Horarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Login.resx">
+      <DependentUpon>F_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_NovoUsuario.resx">
+      <DependentUpon>F_NovoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -179,6 +295,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -195,7 +312,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <None Include="imgs\led-circle-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\led-circle-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgs\logotipo-da-academia_24016-140.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logotipo-recortado.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
