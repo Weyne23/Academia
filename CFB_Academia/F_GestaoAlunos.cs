@@ -20,6 +20,7 @@ namespace CFB_Academia
     {
         List<int> turmasDoAluno = new List<int>();
         List<int> nTurmasDoAluno = new List<int>();
+        string[] plano;
         Aluno alunoAtual;
         bool trocouFoto = false;
         string destinoFotoAntiga = "";
@@ -172,6 +173,19 @@ namespace CFB_Academia
                     cb_status.SelectedValue = aluno.Status;
                     tb_dataDeEntrada.Text = aluno.DataDeEntrada.ToString("dd/MM/yyyy");
                     pb_fotoAluno.ImageLocation = aluno.Foto;
+                    mtb_plano.Text = aluno.Plano;
+                    plano = mtb_plano.Text.Split(' ');
+
+                    try
+                    {
+                        double totalPorMes = Convert.ToDouble(plano[plano.Length - 1].Replace('.', ',')) / Convert.ToInt32(plano[0]);
+                        tb_total.Text = totalPorMes.ToString("N2");
+                    }
+                    catch
+                    {
+                        tb_total.Text = "Erro";
+                    }
+                    
                     trocouFoto = false;
                     destinoFotoAntiga = pb_fotoAluno.ImageLocation;
                 }
@@ -222,6 +236,7 @@ namespace CFB_Academia
                 aluno.Telefone = mtb_telefone.Text;
                 aluno.Status = cb_status.SelectedValue.ToString();
                 aluno.Nome = tb_nomeAluno.Text;
+                aluno.Plano = mtb_plano.Text;
                 dgv_alunos[1, dgv_alunos.SelectedRows[0].Index].Value = tb_nomeAluno.Text;
 
                 if (trocouFoto)
@@ -304,6 +319,9 @@ namespace CFB_Academia
                 turmasDoAluno.AddRange(nTurmasDoAluno);
                 trocouFoto = false;
                 alunoAtual = aluno;
+                plano = mtb_plano.Text.Split(' ');
+                double totalPorMes = Convert.ToDouble(plano[plano.Length - 1].Replace('.', ',')) / Convert.ToInt32(plano[0]);
+                tb_total.Text = totalPorMes.ToString("N2");
                 ctx.SaveChanges();
 
                 if (tamanhoStringTL < turmasLotadas.Length)
@@ -365,6 +383,8 @@ namespace CFB_Academia
 
         private void btn_imprimir_Click(object sender, EventArgs e)
         {
+            string dataVencimento = alunoAtual.Plano;
+
             string nomeArquivo = Globais.caminho + @"\CarteirinhaAluno.pdf";
             FileStream arquivoPDF = new FileStream(nomeArquivo, FileMode.Create);
             Document doc = new Document(PageSize.A7.Rotate());
@@ -384,6 +404,7 @@ namespace CFB_Academia
             paragrafo2.Add("Nome:" + alunoAtual.Nome + "\n");
             paragrafo2.Add("Telefone:" + alunoAtual.Telefone + "\n");
             paragrafo2.Add("Data de Entrada:" + alunoAtual.DataDeEntrada.Date.ToString("dd/MM/yyyy") + "\n");
+            paragrafo2.Add("Plano Acaba em:" + alunoAtual.DataDeEntrada.Date.AddMonths(Convert.ToInt32(plano[0])).ToString("dd/MM/yyyy") + "\n");
             paragrafo2.Alignment = Element.ALIGN_LEFT;
 
             doc.Open();

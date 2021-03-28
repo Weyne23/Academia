@@ -243,6 +243,10 @@
     <Compile Include="Migrations\20210328012140_MigracaoCampoData.designer.cs">
       <DependentUpon>20210328012140_MigracaoCampoData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210328023513_MigracaoCampoPlanoAluno.cs" />
+    <Compile Include="Migrations\20210328023513_MigracaoCampoPlanoAluno.designer.cs">
+      <DependentUpon>20210328023513_MigracaoCampoPlanoAluno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AcademiaContextoModelSnapshot.cs" />
     <Compile Include="Models\AcademiaContexto.cs" />
     <Compile Include="Models\Aluno.cs" />

@@ -14,6 +14,8 @@ namespace CFB_Academia.Models
         public string Status { get; set; }
         public string Foto { get; set; }
         public DateTime DataDeEntrada { get; set; }
+
+        public string Plano { get; set; }
         public ICollection<AlunoTurma> AlunoTurmas { get; set; }
     }
 }

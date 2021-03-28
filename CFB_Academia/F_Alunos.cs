@@ -186,6 +186,7 @@ namespace CFB_Academia
                     aluno.Status = cb_status.SelectedValue.ToString();
                     aluno.Foto = destinoCompleto;
                     aluno.DataDeEntrada = DateTime.Now.Date;
+                    aluno.Plano = mtb_plano.Text;
 
                     for (int i = 0; i < dgv_turmas.Rows.Count; i++)
                     {
