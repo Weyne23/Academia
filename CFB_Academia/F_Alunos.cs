@@ -98,7 +98,8 @@ namespace CFB_Academia
             mtb_telefone.Enabled = true;
             dgv_turmas.Enabled = true;
             tb_nomeAluno.Clear();
-            tb_plano.Clear();
+            mtb_plano.Enabled = true;
+            mtb_plano.Clear();
 
             for (int i = 0; i < dgv_turmas.Rows.Count; i++)
             {
@@ -122,8 +123,9 @@ namespace CFB_Academia
             cb_status.Enabled = false;
             mtb_telefone.Enabled = false;
             dgv_turmas.Enabled = false;
+            mtb_plano.Enabled = false;
             tb_nomeAluno.Clear();
-            tb_plano.Clear();
+            mtb_plano.Clear();
 
             for (int i = 0; i < dgv_turmas.Rows.Count; i++)
             {
@@ -213,8 +215,9 @@ namespace CFB_Academia
                 cb_status.Enabled = false;
                 mtb_telefone.Enabled = false;
                 dgv_turmas.Enabled = false;
+                mtb_plano.Enabled = false;
                 tb_nomeAluno.Clear();
-                tb_plano.Clear();
+                mtb_plano.Clear();
 
                 for (int i = 0; i < dgv_turmas.Rows.Count; i++)
                 {

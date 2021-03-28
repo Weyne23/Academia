@@ -29,7 +29,7 @@ namespace CFB_Academia
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tb_nomeAluno = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,14 +41,13 @@ namespace CFB_Academia
             this.btn_novoAluno = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btn_selPlano = new System.Windows.Forms.Button();
-            this.tb_plano = new System.Windows.Forms.TextBox();
             this.cb_status = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dgv_turmas = new System.Windows.Forms.DataGridView();
             this.pb_fotoAluno = new System.Windows.Forms.PictureBox();
             this.btn_addFoto = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.mtb_plano = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_turmas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_fotoAluno)).BeginInit();
@@ -161,24 +160,6 @@ namespace CFB_Academia
             this.label4.TabIndex = 26;
             this.label4.Text = "Turmas";
             // 
-            // btn_selPlano
-            // 
-            this.btn_selPlano.Location = new System.Drawing.Point(216, 110);
-            this.btn_selPlano.Name = "btn_selPlano";
-            this.btn_selPlano.Size = new System.Drawing.Size(25, 23);
-            this.btn_selPlano.TabIndex = 25;
-            this.btn_selPlano.Text = "...";
-            this.btn_selPlano.UseVisualStyleBackColor = true;
-            // 
-            // tb_plano
-            // 
-            this.tb_plano.Cursor = System.Windows.Forms.Cursors.No;
-            this.tb_plano.Location = new System.Drawing.Point(12, 112);
-            this.tb_plano.Name = "tb_plano";
-            this.tb_plano.ReadOnly = true;
-            this.tb_plano.Size = new System.Drawing.Size(206, 20);
-            this.tb_plano.TabIndex = 24;
-            // 
             // cb_status
             // 
             this.cb_status.Enabled = false;
@@ -201,14 +182,14 @@ namespace CFB_Academia
             // 
             this.dgv_turmas.AllowUserToAddRows = false;
             this.dgv_turmas.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_turmas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_turmas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_turmas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_turmas.Enabled = false;
             this.dgv_turmas.Location = new System.Drawing.Point(12, 153);
@@ -248,18 +229,26 @@ namespace CFB_Academia
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "JPG(*.jpg)|*.jpg|PNG(*.png)|*.png";
             // 
+            // mtb_plano
+            // 
+            this.mtb_plano.Enabled = false;
+            this.mtb_plano.Location = new System.Drawing.Point(12, 112);
+            this.mtb_plano.Mask = "99 Mês(es) por 9999,99";
+            this.mtb_plano.Name = "mtb_plano";
+            this.mtb_plano.Size = new System.Drawing.Size(123, 20);
+            this.mtb_plano.TabIndex = 32;
+            // 
             // F_Alunos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 388);
+            this.Controls.Add(this.mtb_plano);
             this.Controls.Add(this.btn_addFoto);
             this.Controls.Add(this.pb_fotoAluno);
             this.Controls.Add(this.dgv_turmas);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btn_selPlano);
-            this.Controls.Add(this.tb_plano);
             this.Controls.Add(this.cb_status);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
@@ -292,13 +281,12 @@ namespace CFB_Academia
         private System.Windows.Forms.Button btn_novoAluno;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btn_selPlano;
-        private System.Windows.Forms.TextBox tb_plano;
         private System.Windows.Forms.ComboBox cb_status;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgv_turmas;
         private System.Windows.Forms.PictureBox pb_fotoAluno;
         private System.Windows.Forms.Button btn_addFoto;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.MaskedTextBox mtb_plano;
     }
 }
