@@ -170,6 +170,7 @@ namespace CFB_Academia
                     tb_nomeAluno.Text = aluno.Nome;
                     mtb_telefone.Text = aluno.Telefone;
                     cb_status.SelectedValue = aluno.Status;
+                    tb_dataDeEntrada.Text = aluno.DataDeEntrada.ToString("dd/MM/yyyy");
                     pb_fotoAluno.ImageLocation = aluno.Foto;
                     trocouFoto = false;
                     destinoFotoAntiga = pb_fotoAluno.ImageLocation;
@@ -382,6 +383,7 @@ namespace CFB_Academia
             Paragraph paragrafo2 = new Paragraph(dados, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 9, (int)System.Drawing.FontStyle.Regular));
             paragrafo2.Add("Nome:" + alunoAtual.Nome + "\n");
             paragrafo2.Add("Telefone:" + alunoAtual.Telefone + "\n");
+            paragrafo2.Add("Data de Entrada:" + alunoAtual.DataDeEntrada.Date.ToString("dd/MM/yyyy") + "\n");
             paragrafo2.Alignment = Element.ALIGN_LEFT;
 
             doc.Open();

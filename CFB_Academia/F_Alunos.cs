@@ -183,6 +183,7 @@ namespace CFB_Academia
                     aluno.Telefone = mtb_telefone.Text;
                     aluno.Status = cb_status.SelectedValue.ToString();
                     aluno.Foto = destinoCompleto;
+                    aluno.DataDeEntrada = DateTime.Now.Date;
 
                     for (int i = 0; i < dgv_turmas.Rows.Count; i++)
                     {
