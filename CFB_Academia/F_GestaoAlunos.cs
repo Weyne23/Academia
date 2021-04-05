@@ -412,7 +412,7 @@ namespace CFB_Academia
             doc.Add(paragrafo1);
             doc.Add(paragrafo2);
 
-            if (alunoAtual.Foto != null)
+            if (alunoAtual.Foto != "")
             {
                 iTextSharp.text.Image imagemAluno = iTextSharp.text.Image.GetInstance(alunoAtual.Foto);
                 imagemAluno.ScaleToFit(55f, 80f);
